@@ -27,9 +27,7 @@ brew install ffmpeg
 
 3) ffmpeg -i [変換したい動画ファイル] [変換したファイル]
 
-
-
-## Project setup
+# Project setup
 ```
 npm install
 ```
