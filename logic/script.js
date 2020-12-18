@@ -8,55 +8,81 @@ for (let i = 0; i < 10; i++) {
   $('#table').append(tr);  
 }
 
-// ! jquery
-// $(function() {
-//   $('td').click(function() {
+let recorderBtn = true;
+let recordFlag = false;
 
-//     // $(this).each(function() {
-//       $(this).toggleClass('color')
-//     // })
-//   })
-// })
+// * 録画クリックする
+const recorderClick = () => {
+  if(recorderBtn) {
+    recorderBtn = false;
+    btnChange("録画中");
+  } else {
+    recorderBtn = true;
+    btnChange("録画");
+    sessionStorage.clear();
+    isSession();
+  }
+};
 
+// * ボタンテキスト変える
+const btnChange = (value) => {
+  document.getElementById("text").innerHTML = value;
+}
 
 // * 要素押下後、色を変える
-var trigger = document.querySelectorAll('td');
+const trigger = document.querySelectorAll('td');
 const array = []
 for(var i = 0; i < trigger.length ; i++) {
-  trigger[i].onclick = function(e) {
+  trigger[i].onclick = (e) => {
     e.path[0].classList.toggle('color')
-    console.log(e.path[0])
     array.push(e.target.innerHTML)
-    // console.log(array)
-    sessionStorage.setItem("クリックした値", [array])
+    if(document.getElementById("text").innerHTML == "録画中") {
+      console.log("sessionに保存中")
+      sessionStorage.setItem("クリックした値", [array])
+    } 
   }
 }
 
-// * 再生関数
-document.getElementById("button").onclick = function() {
-  const value = sessionStorage.getItem('クリックした値');
-  const arraySession = value.split(',')
-  aaaa(arraySession.length, arraySession);
+// * 再生 ボタン(保存)
+const regenerateClick = () => {
+  if(sessionStorage.getItem('クリックした値') == null) {
+    isSession();
+    return false;
+  } else {
+    const value = sessionStorage.getItem('クリックした値');
+    const arraySession = value.split(',')
+    interval(arraySession.length, arraySession);
+    isSession();
+  }
 };
 
-// *再現
-function aaaa(times, arraySession){
-	var timer_id;
-  var i = 0;
+// *再現 console
+const interval = (times, arraySession) => {
+	let timer_id;
+  let i = 0;
 	timer_id = setInterval((function(){
-    // console.log(arraySession[i])
-    demo(arraySession[i])
+    demonstrate(arraySession[i])
     i++;
     if (i == times) {
       clearInterval(timer_id);
     }
   }), 1000);
 };
-function demo(value) {
+
+// * 再現 template
+const demonstrate = (value) => {
   var triggerEnd = document.querySelectorAll('td');
-  // console.log(triggerEnd)
   console.log(value)
   for(var i = 0; i < triggerEnd.length ; i++) {
     // console.log(triggerEnd[i].innerText)
+  }
+}
+
+// * セッションストレージに値が存在するか確認する
+const isSession = () => {
+  if(sessionStorage.getItem('クリックした値') == null) {
+    document.getElementById("alert").innerHTML = "";
+  } else {
+    document.getElementById("alert").innerHTML = "録画記録あり";
   }
 }

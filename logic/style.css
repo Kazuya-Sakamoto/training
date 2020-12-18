@@ -20,20 +20,6 @@ video {
   border: 1px solid black;
 }
 
-.button {
-  cursor: pointer;
-  display: block;
-  width: 160px;
-  border: 1px solid black;
-  font-size: 16px;
-  text-align: center;
-  padding-top: 2px;
-  padding-bottom: 4px;
-  color: white;
-  background-color: darkgreen;
-  text-decoration: none;
-}
-
 h2 {
   margin-bottom: 4px;
 }
@@ -55,4 +41,25 @@ h2 {
 .bottom {
   clear: both;
   padding-top: 10px;
+}
+
+#button-recorder {
+  color: #ffffff;
+  background-color: #3CABAD;
+  border: none;
+  padding: 0 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  outline: none;
+  cursor: pointer;
+}
+
+#button-regeneration {
+  color: #3CABAD;
+  border: solid 1px #3CABAD;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  outline: none;
+  cursor: pointer;
 }

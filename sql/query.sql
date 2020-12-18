@@ -80,4 +80,55 @@ select * from 顧客 where 生年月日>="1963-12-06";
 select * from 顧客 where 生年月日<="1963-12-06";
 select * from 顧客 where 生年月日<>"1963-12-06";
 
+-- * and / or / and not 
+select * from 顧客 where 姓="上野";
+select * from 顧客 where 姓="上野" and 名="孝";
+select * from 顧客 where 姓="上野" or 名="孝";
+select * from 顧客 where 姓="上野" and not(名="孝");
+select * from 顧客
+	where (姓="上野" or 名="孝") 
+    and 生年月日="1961-02-13";
 
+-- * 並び替え 
+select * from 顧客 order by id desc;
+select * from 顧客 order by id asc;
+
+select * from 顧客 order by 生年月日 desc;
+select * from 顧客 order by せい, めい;
+
+-- * 表示数制限 
+select * from 顧客 limit 10;
+select * from 顧客 limit 20, 10;
+
+select * from 顧客 
+	where 姓 like "上%" order by id desc limit 3;
+
+
+-- * リレーション
+create table 商品 (
+	id int primary key auto_increment,
+    カテゴリー varchar(45),
+    商品名 varchar(1000),
+    価格 smallint
+)
+
+create table カテゴリー (
+	id int primary key auto_increment,
+    カテゴリー名 varchar(45)
+);
+
+update 商品 set カテゴリー=1 where カテゴリー="洋服";
+update 商品 set カテゴリー=2 where カテゴリー="バッグ";
+update 商品 set カテゴリー=3 where カテゴリー="グッズ";
+
+describe 商品;
+
+-- * リレーションからの中執
+select * from 商品 
+	inner join カテゴリー 
+    on 商品.カテゴリー = カテゴリー.id
+    where カテゴリー.id = 1;
+
+select * from 商品, カテゴリー where 
+	商品.カテゴリー = カテゴリー.id
+    and カテゴリー.id = 1;
