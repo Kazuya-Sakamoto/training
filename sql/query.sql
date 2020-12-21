@@ -132,3 +132,9 @@ select * from 商品
 select * from 商品, カテゴリー where 
 	商品.カテゴリー = カテゴリー.id
     and カテゴリー.id = 1;
+
+
+select * from 顧客 left join 購入履歴 
+	on 顧客.id = 購入履歴.顧客
+    inner join 商品 on 商品.id = 商品
+    order by 顧客.id;

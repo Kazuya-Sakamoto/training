@@ -13,7 +13,14 @@ th{
   background: #3CABAD;
 }
 
-.color{background: #000000; color: #ffffff;}
+.color {
+  background: #000000; 
+  color: #ffffff;
+}
+
+.demo {  
+  background: #00eeff;
+}
 
 video {
   margin-top: 2px;

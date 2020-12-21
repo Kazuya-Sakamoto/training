@@ -15,6 +15,7 @@ let recordFlag = false;
 const recorderClick = () => {
   if(recorderBtn) {
     recorderBtn = false;
+    sessionStorage.clear();
     btnChange("録画中");
   } else {
     recorderBtn = true;
@@ -35,6 +36,7 @@ const array = []
 for(var i = 0; i < trigger.length ; i++) {
   trigger[i].onclick = (e) => {
     e.path[0].classList.toggle('color')
+    console.log(e)
     array.push(e.target.innerHTML)
     if(document.getElementById("text").innerHTML == "録画中") {
       console.log("sessionに保存中")
@@ -71,10 +73,16 @@ const interval = (times, arraySession) => {
 
 // * 再現 template
 const demonstrate = (value) => {
-  var triggerEnd = document.querySelectorAll('td');
+  var triggerEnd = document.querySelectorAll('.color');
+  console.log(triggerEnd)
   console.log(value)
+
   for(var i = 0; i < triggerEnd.length ; i++) {
-    // console.log(triggerEnd[i].innerText)
+    console.log(triggerEnd[i].innerText)
+    if(triggerEnd[i].innerText == value ) {
+      console.log("一致するよ！")
+      triggerEnd[i].classList.toggle('demo')
+    }
   }
 }
 
